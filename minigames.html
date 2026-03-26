@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Games Website</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #111, #1c1c1c);
+      color: #fff;
+      min-height: 100vh;
+      padding-top: 70px;
+    }
+
+    .back-home {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffd400;
+      color: #111;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 16px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+      transition: 0.2s;
+    }
+
+    .back-home:hover {
+      transform: translateY(-2px);
+      background: #ffdf33;
+    }
+
+    header {
+      text-align: center;
+      padding: 24px 16px;
+      background: #111;
+      border-bottom: 2px solid gold;
+    }
+
+    header h1 {
+      color: gold;
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #ddd;
+      font-size: 16px;
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    .menu button {
+      background: gold;
+      color: #111;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    .menu button:hover {
+      transform: scale(1.05);
+      background: #ffd84d;
+    }
+
+    .game-section {
+      display: none;
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      padding: 20px;
+    }
+
+    .game-section.active {
+      display: block;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,215,0,0.3);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .game-title {
+      text-align: center;
+      color: gold;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .game-info {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #eee;
+    }
+
+    .scoreboard {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      font-size: 18px;
+    }
+
+    .play-btn {
+      display: inline-block;
+      margin: 10px auto 20px;
+      background: gold;
+      color: #111;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* SOCCER GAME */
+    #soccerField {
+      position: relative;
+      width: 100%;
+      max-width: 850px;
+      height: 450px;
+      margin: 0 auto;
+      background: linear-gradient(#2a8f3b, #1f6d2d);
+      border: 4px solid #fff;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .goal {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 280px;
+      height: 90px;
+      border: 6px solid #fff;
+      border-bottom: none;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .goalkeeper {
+      position: absolute;
+      top: 65px;
+      left: calc(50% - 35px);
+      width: 70px;
+      height: 70px;
+      background: crimson;
+      border-radius: 12px;
+      transition: left 0.25s ease;
+      border: 3px solid #fff;
+    }
+
+    .ball {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 38px;
+      background: #fff;
+      border-radius: 50%;
+      border: 3px solid #111;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    .shoot-area {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .shoot-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .shoot-controls button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fff;
+      color: #111;
+      font-weight: bold;
+    }
+
+    #soccerMessage {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 20px;
+      color: gold;
+      min-height: 28px;
+    }
+
+    /* BALLOON GAME */
+    #balloonArea {
+      position: relative;
+      width: 100%;
+      max-width: 850px;
+      height: 500px;
+      margin: 0 auto;
+      background: linear-gradient(#86d8ff, #dff6ff);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 3px solid #fff;
+      cursor: crosshair;
+    }
+
+    .balloon {
+      position: absolute;
+      width: 55px;
+      height: 70px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: inset -8px -12px 0 rgba(255,255,255,0.2);
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 26px;
+      background: #555;
+      left: 50%;
+      top: 68px;
+      transform: translateX(-50%);
+    }
+
+    /* REACTION GAME */
+    #reactionBox {
+      width: 100%;
+      max-width: 700px;
+      height: 300px;
+      margin: 0 auto;
+      border-radius: 20px;
+      background: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      text-align: center;
+      cursor: pointer;
+      padding: 20px;
+      user-select: none;
+      transition: 0.2s;
+    }
+
+    /* WHACK GAME */
+    #whackGrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hole {
+      height: 140px;
+      background: #333;
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #666;
+      cursor: pointer;
+    }
+
+    .target {
+      position: absolute;
+      bottom: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+      background: gold;
+      border-radius: 50%;
+      transition: bottom 0.2s;
+      border: 4px solid #111;
+    }
+
+    .hole.active .target {
+      bottom: 20px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .small-note {
+      color: #ccc;
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 80px;
+      }
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      .game-title {
+        font-size: 22px;
+      }
+
+      #soccerField {
+        height: 360px;
+      }
+
+      .goal {
+        width: 220px;
+        height: 75px;
+      }
+
+      #reactionBox {
+        height: 240px;
+        font-size: 24px;
+      }
+
+      .hole {
+        height: 110px;
+      }
+
+      .target {
+        width: 64px;
+        height: 64px;
+      }
+
+      .back-home {
+        font-size: 14px;
+        padding: 9px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- tombol beranda pojok kiri -->
+  <a href="index.html" class="back-home">🏠 Beranda</a>
+
+  <header>
+    <h1>MINI GAMES CLICKBET88</h1>
+    <p>Pilih game yang mau dimainkan</p>
+  </header>
+
+  <div class="menu">
+    <button onclick="showGame('soccer')">⚽ Tendang Bola</button>
+    <button onclick="showGame('balloon')">🎈 Pecahin Balon</button>
+    <button onclick="showGame('reaction')">⚡ Tes Reaksi</button>
+    <button onclick="showGame('whack')">🎯 Whack Target</button>
+  </div>
+
+  <!-- SOCCER -->
+  <section id="soccer" class="game-section active">
+    <div class="card">
+      <h2 class="game-title">⚽ Tendang Bola ke Gawang</h2>
+      <p class="game-info">Pilih arah tendangan. Kalau bola masuk tanpa ditangkap kiper = gol.</p>
+
+      <div class="scoreboard">
+        <div>Skor: <span id="soccerScore">0</span></div>
+        <div>Percobaan: <span id="soccerShots">0</span>/10</div>
+      </div>
+
+      <div id="soccerField">
+        <div class="goal"></div>
+        <div class="goalkeeper" id="goalkeeper"></div>
+        <div class="ball" id="ball">⚽</div>
+      </div>
+
+      <div class="shoot-area">
+        <button class="play-btn" onclick="resetSoccer()">Main Ulang</button>
+        <div class="shoot-controls">
+          <button onclick="shootBall('left')">Kiri</button>
+          <button onclick="shootBall('center')">Tengah</button>
+          <button onclick="shootBall('right')">Kanan</button>
+        </div>
+        <div id="soccerMessage"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BALLOON -->
+  <section id="balloon" class="game-section">
+    <div class="card">
+      <h2 class="game-title">🎈 Pecahin Balon</h2>
+      <p class="game-info">Klik balon sebanyak mungkin sebelum waktu habis.</p>
+
+      <div class="scoreboard">
+        <div>Skor: <span id="balloonScore">0</span></div>
+        <div>Waktu: <span id="balloonTime">30</span> detik</div>
+      </div>
+
+      <div class="center">
+        <button class="play-btn" onclick="startBalloonGame()">Mulai Game</button>
+      </div>
+
+      <div id="balloonArea"></div>
+      <p class="small-note">Tips: makin cepat klik, makin tinggi skor.</p>
+    </div>
+  </section>
+
+  <!-- REACTION -->
+  <section id="reaction" class="game-section">
+    <div class="card">
+      <h2 class="game-title">⚡ Tes Reaksi</h2>
+      <p class="game-info">Klik mulai, tunggu layar berubah hijau, lalu klik secepat mungkin.</p>
+
+      <div class="scoreboard">
+        <div>Hasil Terakhir: <span id="reactionResult">-</span></div>
+      </div>
+
+      <div class="center">
+        <button class="play-btn" onclick="startReactionGame()">Mulai Tes</button>
+      </div>
+
+      <div id="reactionBox">Klik tombol mulai</div>
+    </div>
+  </section>
+
+  <!-- WHACK -->
+  <section id="whack" class="game-section">
+    <div class="card">
+      <h2 class="game-title">🎯 Whack Target</h2>
+      <p class="game-info">Klik target yang muncul secepat mungkin dalam 20 detik.</p>
+
+      <div class="scoreboard">
+        <div>Skor: <span id="whackScore">0</span></div>
+        <div>Waktu: <span id="whackTime">20</span> detik</div>
+      </div>
+
+      <div class="center">
+        <button class="play-btn" onclick="startWhackGame()">Mulai Game</button>
+      </div>
+
+      <div id="whackGrid">
+        <div class="hole"><div class="target"></div></div>
+        <div class="hole"><div class="target"></div></div>
+        <div class="hole"><div class="target"></div></div>
+        <div class="hole"><div class="target"></div></div>
+        <div class="hole"><div class="target"></div></div>
+        <div class="hole"><div class="target"></div></div>
+        <div class="hole"><div class="target"></div></div>
+        <div class="hole"><div class="target"></div></div>
+        <div class="hole"><div class="target"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function showGame(id) {
+      document.querySelectorAll('.game-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+    }
+
+    /* =========================
+       SOCCER GAME
+    ========================= */
+    let soccerScore = 0;
+    let soccerShots = 0;
+    let soccerLocked = false;
+
+    function resetSoccer() {
+      soccerScore = 0;
+      soccerShots = 0;
+      soccerLocked = false;
+      document.getElementById('soccerScore').textContent = soccerScore;
+      document.getElementById('soccerShots').textContent = soccerShots;
+      document.getElementById('soccerMessage').textContent = '';
+      const ball = document.getElementById('ball');
+      ball.style.transition = 'none';
+      ball.style.left = '50%';
+      ball.style.bottom = '40px';
+      ball.style.transform = 'translateX(-50%)';
+    }
+
+    function shootBall(direction) {
+      if (soccerLocked || soccerShots >= 10) return;
+
+      soccerLocked = true;
+      soccerShots++;
+      document.getElementById('soccerShots').textContent = soccerShots;
+
+      const ball = document.getElementById('ball');
+      const keeper = document.getElementById('goalkeeper');
+      const msg = document.getElementById('soccerMessage');
+
+      const keeperPositions = ['30%', '50%', '70%'];
+      const randomKeeper = keeperPositions[Math.floor(Math.random() * keeperPositions.length)];
+      keeper.style.left = `calc(${randomKeeper} - 35px)`;
+
+      let targetLeft = '50%';
+      if (direction === 'left') targetLeft = '35%';
+      if (direction === 'center') targetLeft = '50%';
+      if (direction === 'right') targetLeft = '65%';
+
+      ball.style.transition = 'all 0.7s ease';
+      ball.style.left = targetLeft;
+      ball.style.bottom = '330px';
+
+      setTimeout(() => {
+        let goal = false;
+
+        if (
+          (direction === 'left' && randomKeeper !== '30%') ||
+          (direction === 'center' && randomKeeper !== '50%') ||
+          (direction === 'right' && randomKeeper !== '70%')
+        ) {
+          goal = true;
+        }
+
+        if (goal) {
+          soccerScore++;
+          msg.textContent = 'GOOOLLL! 🎉';
+        } else {
+          msg.textContent = 'Kena tangkap kiper! 🧤';
+        }
+
+        document.getElementById('soccerScore').textContent = soccerScore;
+
+        setTimeout(() => {
+          ball.style.transition = 'none';
+          ball.style.left = '50%';
+          ball.style.bottom = '40px';
+          ball.style.transform = 'translateX(-50%)';
+          soccerLocked = false;
+
+          if (soccerShots >= 10) {
+            msg.textContent = `Game selesai! Total gol: ${soccerScore} dari 10 tendangan`;
+          }
+        }, 500);
+      }, 800);
+    }
+
+    /* =========================
+       BALLOON GAME
+    ========================= */
+    let balloonScore = 0;
+    let balloonTime = 30;
+    let balloonInterval;
+    let balloonTimer;
+    let balloonRunning = false;
+
+    function randomColor() {
+      const colors = ['#ff4d4d', '#4da6ff', '#ffd24d', '#66e066', '#cc66ff', '#ff66b3'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function createBalloon() {
+      const area = document.getElementById('balloonArea');
+      if (!balloonRunning) return;
+
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.background = randomColor();
+      balloon.style.left = Math.random() * (area.clientWidth - 60) + 'px';
+      balloon.style.top = area.clientHeight + 'px';
+
+      area.appendChild(balloon);
+
+      let pos = area.clientHeight;
+      const speed = 2 + Math.random() * 2;
+
+      const fly = setInterval(() => {
+        pos -= speed;
+        balloon.style.top = pos + 'px';
+
+        if (pos < -90) {
+          clearInterval(fly);
+          balloon.remove();
+        }
+      }, 16);
+
+      balloon.addEventListener('click', function() {
+        balloonScore++;
+        document.getElementById('balloonScore').textContent = balloonScore;
+        clearInterval(fly);
+        balloon.remove();
+      });
+    }
+
+    function startBalloonGame() {
+      balloonScore = 0;
+      balloonTime = 30;
+      balloonRunning = true;
+      document.getElementById('balloonScore').textContent = balloonScore;
+      document.getElementById('balloonTime').textContent = balloonTime;
+      document.getElementById('balloonArea').innerHTML = '';
+
+      clearInterval(balloonInterval);
+      clearInterval(balloonTimer);
+
+      balloonInterval = setInterval(createBalloon, 700);
+
+      balloonTimer = setInterval(() => {
+        balloonTime--;
+        document.getElementById('balloonTime').textContent = balloonTime;
+
+        if (balloonTime <= 0) {
+          clearInterval(balloonInterval);
+          clearInterval(balloonTimer);
+          balloonRunning = false;
+          alert('Waktu habis! Skor kamu: ' + balloonScore);
+        }
+      }, 1000);
+    }
+
+    /* =========================
+       REACTION GAME
+    ========================= */
+    let reactionStartTime = 0;
+    let reactionTimeout;
+    let reactionState = 'idle';
+
+    function startReactionGame() {
+      const box = document.getElementById('reactionBox');
+      const result = document.getElementById('reactionResult');
+
+      clearTimeout(reactionTimeout);
+      reactionState = 'waiting';
+      box.style.background = '#b22222';
+      box.textContent = 'Tunggu warna hijau... jangan klik dulu!';
+      result.textContent = '-';
+
+      const delay = Math.floor(Math.random() * 3000) + 2000;
+
+      reactionTimeout = setTimeout(() => {
+        reactionState = 'ready';
+        reactionStartTime = Date.now();
+        box.style.background = '#1faa00';
+        box.textContent = 'KLIK SEKARANG!';
+      }, delay);
+    }
+
+    document.getElementById('reactionBox').addEventListener('click', function() {
+      const box = this;
+      const result = document.getElementById('reactionResult');
+
+      if (reactionState === 'waiting') {
+        clearTimeout(reactionTimeout);
+        reactionState = 'idle';
+        box.style.background = '#444';
+        box.textContent = 'Terlalu cepat! Klik tombol mulai lagi';
+        result.textContent = 'Gagal';
+      } else if (reactionState === 'ready') {
+        const time = Date.now() - reactionStartTime;
+        reactionState = 'idle';
+        box.style.background = '#444';
+        box.textContent = 'Mantap! Klik tombol mulai untuk coba lagi';
+        result.textContent = time + ' ms';
+      }
+    });
+
+    /* =========================
+       WHACK GAME
+    ========================= */
+    let whackScore = 0;
+    let whackTime = 20;
+    let whackTimer;
+    let whackTargetTimer;
+    let whackRunning = false;
+
+    const holes = document.querySelectorAll('.hole');
+
+    function randomHole() {
+      return holes[Math.floor(Math.random() * holes.length)];
+    }
+
+    function clearActiveHoles() {
+      holes.forEach(hole => hole.classList.remove('active'));
+    }
+
+    holes.forEach(hole => {
+      hole.addEventListener('click', function() {
+        if (whackRunning && hole.classList.contains('active')) {
+          whackScore++;
+          document.getElementById('whackScore').textContent = whackScore;
+          hole.classList.remove('active');
+        }
+      });
+    });
+
+    function startWhackGame() {
+      whackScore = 0;
+      whackTime = 20;
+      whackRunning = true;
+      document.getElementById('whackScore').textContent = whackScore;
+      document.getElementById('whackTime').textContent = whackTime;
+
+      clearInterval(whackTimer);
+      clearInterval(whackTargetTimer);
+      clearActiveHoles();
+
+      whackTargetTimer = setInterval(() => {
+        clearActiveHoles();
+        const hole = randomHole();
+        hole.classList.add('active');
+
+        setTimeout(() => {
+          hole.classList.remove('active');
+        }, 700);
+      }, 900);
+
+      whackTimer = setInterval(() => {
+        whackTime--;
+        document.getElementById('whackTime').textContent = whackTime;
+
+        if (whackTime <= 0) {
+          clearInterval(whackTimer);
+          clearInterval(whackTargetTimer);
+          clearActiveHoles();
+          whackRunning = false;
+          alert('Game selesai! Skor kamu: ' + whackScore);
+        }
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>

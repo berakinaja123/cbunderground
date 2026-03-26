@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Kontak Kami</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+    background: #000;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+/* TOMBOL BERANDA POJOK */
+.beranda-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: gold;
+    color: black;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 999;
+    transition: 0.3s;
+}
+
+.beranda-btn:hover {
+    background: orange;
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    margin-top: 60px;
+    color: gold;
+}
+
+/* Container */
+.kontak-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+/* Card */
+.kontak-card {
+    background: linear-gradient(145deg, #111, #1a1a1a);
+    border: 1px solid gold;
+    border-radius: 15px;
+    text-align: center;
+    padding: 30px 20px;
+    transition: 0.3s;
+}
+
+.kontak-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px gold;
+}
+
+.kontak-card i {
+    font-size: 40px;
+    color: gold;
+    margin-bottom: 15px;
+}
+
+.kontak-card h2 {
+    margin-bottom: 15px;
+}
+
+/* Button */
+.kontak-card a.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: gold;
+    color: black;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.kontak-card a.btn:hover {
+    background: orange;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BERANDA POJOK -->
+<a href="index.html" class="beranda-btn">
+    <i class="fas fa-home"></i> Beranda
+</a>
+
+<h1>HUBUNGI KAMI</h1>
+
+<div class="kontak-wrapper">
+
+    <div class="kontak-card">
+        <i class="fas fa-headset"></i>
+        <h2>LIVECHAT</h2>
+        <a class="btn" href="https://direct.lc.chat/1351372" target="_blank">Chat Sekarang</a>
+    </div>
+
+    <div class="kontak-card">
+        <i class="fab fa-whatsapp"></i>
+        <h2>WHATSAPP</h2>
+        <a class="btn" href="https://wa.me/13862861747" target="_blank">Hubungi</a>
+    </div>
+
+    <div class="kontak-card">
+        <i class="fab fa-telegram"></i>
+        <h2>TELEGRAM</h2>
+        <a class="btn" href="https://t.me/CB88VIP" target="_blank">Join Chat</a>
+    </div>
+
+    <div class="kontak-card">
+        <i class="fab fa-instagram"></i>
+        <h2>INSTAGRAM</h2>
+        <a class="btn" href="https://instagram.com/clickquest.ofc" target="_blank">Follow</a>
+    </div>
+
+    <div class="kontak-card">
+        <i class="fas fa-user-cog"></i>
+        <h2>JOKI</h2>
+        <a class="btn" href="https://wa.me/13862861747" target="_blank">Order Joki</a>
+    </div>
+
+</div>
+
+</body>
+</html>

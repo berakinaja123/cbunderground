@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Gaming Gold</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="#" class="download-btn">CLICKBET88</a>
+
+    <div class="top-actions">
+      <div class="flag-dot"></div>
+      <a href="login.html" class="btn-login">LOGIN</a>
+      <a href="daftar.html" class="btn-register">DAFTAR</a>
+    </div>
+  </div>
+
+  <div class="subinfo">SELAMAT DATANG DI CLICKBET88 UNDERGROUND</div>
+
+  <nav class="navbar">
+    <ul class="nav-menu">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="promosi.html">Promosi</a></li>
+      <li><a href="minigames.html">Mini Games</a></li>
+      <li><a href="https://www.livescore.com" target="_blank">LIVESCORE</a></li>
+      <li><a href="kontak.html">Kontak</a></li>
+      <li><a href="calculator.html">Calculator</a></li>
+      <li><a href="login.html">Tournament</a></li>
+      <li><a href="daftar.html">Lebih Banyak</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+  <div class="hero-slider">
+
+    <div class="slide active">
+      <img src="https://i.imgur.com/QAemPSD.png" alt="Banner 1">
+      <div class="slide-overlay"></div>
+    </div>
+
+    <div class="slide">
+      <img src="https://i.imgur.com/8tXSAoK.png" alt="Banner 2">
+      <div class="slide-overlay"></div>
+    </div>
+
+    <div class="slide">
+      <img src="https://i.imgur.com/PH4IobH.png" alt="Banner 3">
+      <div class="slide-overlay"></div>
+    </div>
+
+    <button class="slider-btn prev" onclick="prevSlide()">❮</button>
+    <button class="slider-btn next" onclick="nextSlide()">❯</button>
+
+    <div class="slider-dots">
+      <span class="dot active" onclick="goToSlide(0)"></span>
+      <span class="dot" onclick="goToSlide(1)"></span>
+      <span class="dot" onclick="goToSlide(2)"></span>
+    </div>
+
+  </div>
+</section>
+
+  <div class="marquee-bar">
+    <div class="marquee-label">Informasi</div>
+    <div class="marquee-text">
+      <span>BONUS INI KHUSUS KAMU YANG BELUM KEDAPATAN,LANGSUNG MASUK KE LIVECHAT UNTUK CLAIM BONUS YANG KAMU TAU DISINI!!.</span>
+    </div>
+    <div class="marquee-date" id="liveClock"></div>
+  </div>
+
+  <section class="jackpot">
+    <div class="jackpot-title">PROGRESSIVE JACKPOT</div>
+    <div class="jackpot-value" id="jackpotValue">0</div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Top Provider</h2>
+    <div class="provider-row">
+      <div class="provider-item">PG Soft</div>
+      <div class="provider-item">Joker</div>
+      <div class="provider-item">Microgaming</div>
+      <div class="provider-item">NoLimit</div>
+      <div class="provider-item">AdvantPlay</div>
+      <div class="provider-item">CQ9</div>
+      <div class="provider-item">JDB</div>
+      <div class="provider-item">JILI</div>
+    </div>
+
+    <h2 class="section-title">BUKTI JACKPOT HARI INI</h2>
+    <div class="game-grid">
+      <div class="game-card">
+        <div class="game-thumb" style="background-image:url('https://i.imgur.com/ZQqotAo.png');"></div>
+        <div class="game-info">
+          <h3>AM8*2**9</h3>
+          <p>terimakasih clickbet88 situs paling gacor depo kecil menang besar.</p>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-thumb" style="background-image:url('https://i.imgur.com/nMmszHM.png');"></div>
+        <div class="game-info">
+          <h3>HUMGudangA**02</h3>
+          <p>mantap banget di clickbet88 depo tipis langsung maxwin 🔥.</p>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-thumb" style="background-image:url('https://i.imgur.com/FHKwluF.png');"></div>
+        <div class="game-info">
+          <h3>GASDapur**03</h3>
+          <p>rekomendasi terbaik clickbet88 gacor parah auto cuan.</p>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-thumb" style="background-image:url('https://i.imgur.com/TiOygUF.png');"></div>
+        <div class="game-info">
+          <h3>SMOKELantai2**08</h3>
+          <p>bukti nyata di clickbet88 wd cepat dan aman.</p>
+        </div>
+      </div>
+
+      <div class="game-card">
+        <div class="game-thumb" style="background-image:url('https://i.imgur.com/5rROwXk.png');"></div>
+        <div class="game-info">
+          <h3>ProjectZ**04</h3>
+          <p>main santai di clickbet88 tapi hasilnya luar biasa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a href="https://direct.lc.chat/1351372" target="_blank" class="livechat">💬 Live Chat</a>
+<script>
+function updateClock() {
+  const now = new Date();
+
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = now.getFullYear();
+
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  const format = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  document.getElementById("liveClock").textContent = format;
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+<script>
+let jackpot = 6087795164;
+const jackpotEl = document.getElementById("jackpotValue");
+
+function animateJackpot(target, duration) {
+  let start = 0;
+  const startTime = performance.now();
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    const currentValue = Math.floor(progress * (target - start) + start);
+    jackpotEl.textContent = currentValue.toLocaleString("en-US");
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      startLiveIncrease();
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+function startLiveIncrease() {
+  setInterval(() => {
+    const tambah = Math.floor(Math.random() * 500) + 50;
+    jackpot += tambah;
+    jackpotEl.textContent = jackpot.toLocaleString("en-US");
+  }, 1000);
+}
+
+animateJackpot(jackpot, 3000);
+</script>
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove("active");
+    dots[i].classList.remove("active");
+  });
+
+  slides[index].classList.add("active");
+  dots[index].classList.add("active");
+}
+
+function nextSlide() {
+  currentSlide++;
+  if (currentSlide >= slides.length) {
+    currentSlide = 0;
+  }
+  showSlide(currentSlide);
+}
+
+function prevSlide() {
+  currentSlide--;
+  if (currentSlide < 0) {
+    currentSlide = slides.length - 1;
+  }
+  showSlide(currentSlide);
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  showSlide(currentSlide);
+}
+
+setInterval(nextSlide, 4000);
+</script>
+<div id="imageModal" class="image-modal" onclick="closeImage()">
+  <span class="close-modal">&times;</span>
+  <img id="modalImage" class="modal-content">
+</div>
+
+</body>
+</html>

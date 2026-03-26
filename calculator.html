@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hitungan Parlay</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 20px;
+      background:
+        linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.92)),
+        radial-gradient(circle at top, rgba(255, 210, 0, 0.08), transparent 35%);
+    }
+
+    .top-action {
+      margin-bottom: 18px;
+    }
+
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffd400;
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      line-height: 1;
+      transition: 0.2s ease;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .home-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: #000;
+      flex-shrink: 0;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      border: 2px solid #d8b100;
+      border-radius: 16px;
+      background: #0c0c0c;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255, 212, 0, 0.12);
+    }
+
+    .header {
+      padding: 28px 24px;
+      text-align: center;
+      background: linear-gradient(180deg, #2a2200 0%, #141414 100%);
+      border-bottom: 2px solid #d8b100;
+    }
+
+    .header h1 {
+      color: #ffd400;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      color: #f5e8a5;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #ffd400;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #ffd400;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #695500;
+      background: #171717;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #ffd400;
+      box-shadow: 0 0 0 3px rgba(255, 212, 0, 0.12);
+    }
+
+    .odds-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .odds-card {
+      background: #121212;
+      border: 1px solid #4a3d00;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .odds-card-title {
+      color: #ffd400;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .odds-card .inner {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: #ffd400;
+      color: #111;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #ffd400;
+      border: 1px solid #ffd400;
+    }
+
+    .result {
+      margin-top: 24px;
+      border: 1px solid #544500;
+      border-radius: 14px;
+      background: #111;
+      padding: 22px;
+    }
+
+    .result h2 {
+      color: #ffd400;
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .result-box {
+      background: #191919;
+      border: 1px solid #373737;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .result-box small {
+      display: block;
+      color: #c8c8c8;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .result-box strong {
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .note {
+      margin-top: 16px;
+      color: #d7d7d7;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .grid,
+      .odds-list,
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 28px;
+      }
+
+      .home-btn {
+        font-size: 16px;
+        padding: 10px 16px;
+      }
+
+      .home-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-action">
+      <a href="index.html" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+        </svg>
+        <span>Beranda</span>
+      </a>
+    </div>
+
+    <div class="container">
+      <div class="header">
+        <h1>HITUNGAN PARLAY</h1>
+        <p>
+          Kalkulator ini bisa dipakai untuk hitung parlay dengan status hasil seperti
+          menang full, menang setengah, kalah setengah, dan kalah full.
+        </p>
+      </div>
+
+      <div class="content">
+        <div class="grid">
+          <div class="field full">
+            <label for="stake">Modal / Taruhan</label>
+            <input type="number" id="stake" placeholder="Contoh: 100000" min="0" step="0.01" />
+          </div>
+
+          <div class="field full">
+            <label for="legs">Jumlah Tim / Pilihan</label>
+            <select id="legs">
+              <option value="2">2 Pilihan</option>
+              <option value="3">3 Pilihan</option>
+              <option value="4">4 Pilihan</option>
+              <option value="5">5 Pilihan</option>
+              <option value="6">6 Pilihan</option>
+              <option value="7">7 Pilihan</option>
+              <option value="8">8 Pilihan</option>
+              <option value="9">9 Pilihan</option>
+              <option value="10">10 Pilihan</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <div class="section-title">Input Odds dan Hasil</div>
+            <div id="oddsContainer" class="odds-list"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn-primary" onclick="calculateParlay()">Hitung Sekarang</button>
+          <button class="btn-secondary" onclick="resetForm()">Reset</button>
+        </div>
+
+        <div class="result">
+          <h2>Hasil Perhitungan</h2>
+          <div class="result-grid">
+            <div class="result-box">
+              <small>Total Odds Akhir</small>
+              <strong id="totalOdds">0.00</strong>
+            </div>
+            <div class="result-box">
+              <small>Total Bayaran</small>
+              <strong id="totalPayout">Rp 0</strong>
+            </div>
+            <div class="result-box">
+              <small>Profit Bersih</small>
+              <strong id="netProfit">Rp 0</strong>
+            </div>
+            <div class="result-box">
+              <small>Jumlah Pilihan</small>
+              <strong id="totalLegs">0</strong>
+            </div>
+          </div>
+
+          <div class="note">
+            Keterangan perhitungan:<br>
+            Menang Full = stake × odds<br>
+            Menang Setengah = setengah stake menang + setengah stake balik<br>
+            Kalah Setengah = setengah stake hilang + setengah stake balik<br>
+            Kalah Full = stake hangus
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const legsSelect = document.getElementById('legs');
+    const oddsContainer = document.getElementById('oddsContainer');
+
+    function formatRupiah(number) {
+      return 'Rp ' + Number(number).toLocaleString('id-ID', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function renderOddsInputs() {
+      const total = parseInt(legsSelect.value, 10);
+      oddsContainer.innerHTML = '';
+
+      for (let i = 1; i <= total; i++) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'odds-card';
+
+        wrapper.innerHTML = `
+          <div class="odds-card-title">Pilihan ${i}</div>
+          <div class="inner">
+            <input type="number" min="1" step="0.01" placeholder="Odds ${i} - contoh 1.80" class="odds-input" />
+            <select class="result-input">
+              <option value="menang_full">Menang Full</option>
+              <option value="menang_setengah">Menang Setengah</option>
+              <option value="kalah_setengah">Kalah Setengah</option>
+              <option value="kalah_full">Kalah Full</option>
+            </select>
+          </div>
+        `;
+
+        oddsContainer.appendChild(wrapper);
+      }
+
+      document.getElementById('totalLegs').textContent = total;
+    }
+
+    function calculateLegReturn(stakePerLeg, odds, result) {
+      if (result === 'menang_full') {
+        return stakePerLeg * odds;
+      }
+
+      if (result === 'menang_setengah') {
+        return (stakePerLeg / 2) * odds + (stakePerLeg / 2);
+      }
+
+      if (result === 'kalah_setengah') {
+        return stakePerLeg / 2;
+      }
+
+      if (result === 'kalah_full') {
+        return 0;
+      }
+
+      return stakePerLeg;
+    }
+
+    function calculateParlay() {
+      const stake = parseFloat(document.getElementById('stake').value);
+      const oddsInputs = document.querySelectorAll('.odds-input');
+      const resultInputs = document.querySelectorAll('.result-input');
+
+      if (!stake || stake <= 0) {
+        alert('Masukkan modal taruhan terlebih dahulu.');
+        return;
+      }
+
+      let runningAmount = stake;
+
+      for (let i = 0; i < oddsInputs.length; i++) {
+        const odds = parseFloat(oddsInputs[i].value);
+        const result = resultInputs[i].value;
+
+        if (!odds || odds < 1) {
+          alert('Semua odds harus diisi dan minimal 1.00');
+          return;
+        }
+
+        runningAmount = calculateLegReturn(runningAmount, odds, result);
+      }
+
+      const payout = runningAmount;
+      const profit = payout - stake;
+      const oddsEquivalent = stake > 0 ? payout / stake : 0;
+
+      document.getElementById('totalOdds').textContent = oddsEquivalent.toFixed(2);
+      document.getElementById('totalPayout').textContent = formatRupiah(payout);
+      document.getElementById('netProfit').textContent = formatRupiah(profit);
+      document.getElementById('totalLegs').textContent = oddsInputs.length;
+    }
+
+    function resetForm() {
+      document.getElementById('stake').value = '';
+      renderOddsInputs();
+      document.getElementById('totalOdds').textContent = '0.00';
+      document.getElementById('totalPayout').textContent = 'Rp 0';
+      document.getElementById('netProfit').textContent = 'Rp 0';
+      document.getElementById('totalLegs').textContent = '0';
+    }
+
+    legsSelect.addEventListener('change', renderOddsInputs);
+    renderOddsInputs();
+  </script>
+</body>
+</html>

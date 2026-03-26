@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halaman Promosi</title>
+
+  <!-- Font Awesome untuk icon rumah -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: #fff;
+    }
+
+    /* HEADER */
+    header {
+      padding: 14px 16px;
+      background: #000;
+    }
+
+    .home-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffd400;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 22px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 212, 0, 0.25);
+    }
+
+    .home-button:hover {
+      background: #ffdf33;
+      transform: translateY(-2px);
+    }
+
+    .home-button i {
+      font-size: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 30px 20px 20px;
+    }
+
+    .hero h1 {
+      color: gold;
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #ddd;
+      font-size: 18px;
+    }
+
+    /* PROMO GRID */
+    .promo-section {
+      max-width: 1280px;
+      margin: 25px auto 60px;
+      padding: 0 20px;
+    }
+
+    .promo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .promo-card {
+      background: #151515;
+      border: 2px solid #d4af37;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .promo-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    .promo-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      background: #222;
+    }
+
+    .promo-content {
+      padding: 16px;
+      text-align: center;
+    }
+
+    .promo-content h3 {
+      color: gold;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .promo-content p {
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.75);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #181818;
+      width: 100%;
+      max-width: 700px;
+      border: 2px solid gold;
+      border-radius: 14px;
+      padding: 25px;
+      position: relative;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    .modal-content h2 {
+      color: gold;
+      margin-bottom: 14px;
+      font-size: 28px;
+    }
+
+    .modal-content ul {
+      padding-left: 20px;
+      color: #ddd;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: gold;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      border-top: 1px solid #333;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .home-button {
+        font-size: 18px;
+        padding: 12px 18px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .promo-card img {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOMBOL BERANDA KIRI ATAS -->
+  <header>
+    <a href="index.html" class="home-button">
+      <i class="fa-solid fa-house"></i>
+      Beranda
+    </a>
+  </header>
+
+  <!-- JUDUL -->
+  <section class="hero">
+    <h1>HALAMAN PROMOSI</h1>
+    <p>Pilih promo favoritmu dan klik banner untuk melihat syarat & ketentuan</p>
+  </section>
+
+  <!-- DAFTAR PROMO -->
+  <section class="promo-section">
+    <div class="promo-grid">
+
+      <div class="promo-card" onclick="openModal(
+        'BONUS NEW MEMBER 100%',
+        [
+          'Promo berlaku untuk member baru.',
+          'Minimal deposit sesuai ketentuan website.',
+          'Bonus hanya dapat diklaim 1 kali per akun.',
+          'Turnover wajib diselesaikan sebelum withdraw.',
+          'Keputusan admin bersifat mutlak.'
+        ]
+      )">
+        <img src="https://i.imgur.com/paFKYEp.png" alt="BONUS NEW MEMBER 100% ">
+        <div class="promo-content">
+          <h3>BONUS NEW MEMBER 100% </h3>
+          <p>Klik banner untuk melihat detail promo.</p>
+        </div>
+      </div>
+
+      <div class="promo-card" onclick="openModal(
+        'BONUS DEPOSIT HARIAN 10%',
+        [
+          'Promo berlaku setiap hari.',
+          'Minimal deposit sesuai nominal yang ditentukan.',
+          'Bonus tidak dapat digabung dengan promo lain.',
+          'Turnover mengikuti peraturan yang berlaku.',
+          'Promo dapat berubah sewaktu-waktu.'
+        ]
+      )">
+        <img src="https://i.imgur.com/nnxXnBD.png" alt="BONUS DEPOSIT HARIAN 10%">
+        <div class="promo-content">
+          <h3>BONUS DEPOSIT HARIAN 10%</h3>
+          <p>Klik banner untuk melihat detail promo.</p>
+        </div>
+      </div>
+
+      <div class="promo-card" onclick="openModal(
+        'MONDAY BOOSTER KHUSUS',
+        [
+          'Promo hanya berlaku hari Senin.',
+          'Bonus hanya untuk member yang memenuhi syarat.',
+          'Minimal deposit mengikuti ketentuan promo.',
+          'Bonus hangus jika ada pelanggaran.',
+          'Syarat turnover wajib dipenuhi.'
+        ]
+      )">
+        <img src="https://i.imgur.com/WQ04jEw.png" alt="MONDAY BOOSTER KHUSUS">
+        <div class="promo-content">
+          <h3>MONDAY BOOSTER KHUSUS</h3>
+          <p>Klik banner untuk melihat detail promo.</p>
+        </div>
+      </div>
+
+      <div class="promo-card" onclick="openModal(
+        'TOURNAMENT PG SOFT',
+        [
+          'Promo berlaku selama periode tournament.',
+          'Peserta wajib mengikuti aturan yang berlaku.',
+          'Hadiah diberikan sesuai peringkat akhir.',
+          'Segala bentuk kecurangan akan didiskualifikasi.',
+          'Keputusan penyelenggara final.'
+        ]
+      )">
+        <img src="https://i.imgur.com/ZeFwq7z.png" alt="TOURNAMENT PG SOFT">
+        <div class="promo-content">
+          <h3>TOURNAMENT PG SOFT</h3>
+          <p>Klik banner untuk melihat detail promo.</p>
+        </div>
+      </div>
+
+      <div class="promo-card" onclick="openModal(
+        'POINT VIP',
+        [
+          'Promo berlaku untuk member VIP.',
+          'Point diperoleh dari transaksi yang valid.',
+          'Point dapat ditukar sesuai aturan website.',
+          'Point tidak dapat diuangkan langsung.',
+          'Admin berhak meninjau penggunaan point.'
+        ]
+      )">
+        <img src="https://i.imgur.com/acsfoff.png" alt="POINT VIP">
+        <div class="promo-content">
+          <h3>POINT VIP</h3>
+          <p>Klik banner untuk melihat detail promo.</p>
+        </div>
+      </div>
+
+      <div class="promo-card" onclick="openModal(
+        'POINT RUNGKAT HARIAN',
+        [
+          'Promo berlaku harian sesuai event aktif.',
+          'Point dihitung dari aktivitas valid.',
+          'Reward diberikan sesuai pencapaian point.',
+          'Promo tidak berlaku untuk akun ganda.',
+          'Syarat dan ketentuan dapat diperbarui.'
+        ]
+      )">
+        <img src="https://i.imgur.com/4SAXA1r.png" alt="POINT RUNGKAT HARIAN">
+        <div class="promo-content">
+          <h3>POINT RUNGKAT HARIAN</h3>
+          <p>Klik banner untuk melihat detail promo.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal" id="promoModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle">Judul Promo</h2>
+      <ul id="modalTerms"></ul>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Halaman Promosi. Semua Hak Dilindungi.
+  </footer>
+
+  <script>
+    function openModal(title, terms) {
+      document.getElementById("modalTitle").innerText = title;
+
+      const modalTerms = document.getElementById("modalTerms");
+      modalTerms.innerHTML = "";
+
+      terms.forEach(term => {
+        const li = document.createElement("li");
+        li.textContent = term;
+        modalTerms.appendChild(li);
+      });
+
+      document.getElementById("promoModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("promoModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("promoModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+
+</body>
+</html>
