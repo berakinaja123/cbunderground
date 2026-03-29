@@ -339,13 +339,46 @@ a {
   position: fixed;
   right: 18px;
   bottom: 18px;
-  background: linear-gradient(to bottom, #fff2a8, #ffd700, #d4a400);
+  z-index: 9999;
+  text-align: center;
+}
+
+/* gambar */
+.livechat img {
+  width: 120px;
+  height: auto;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255, 200, 0, 0.5);
+  transition: 0.3s;
+}
+
+/* tulisan di bawah */
+.livechat span {
+  display: block;
+  margin-top: 5px;
+  background: linear-gradient(to right, #ffd700, #ffcc00);
   color: #111;
-  padding: 14px 20px;
-  border-radius: 40px;
+  font-size: 12px;
   font-weight: bold;
-  box-shadow: 0 0 18px rgba(255, 215, 0, 0.7);
-  z-index: 999;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.6);
+}
+
+/* hover */
+.livechat:hover img {
+  transform: scale(1.05);
+}
+
+@keyframes livechatAnim {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.6; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.livechat img {
+  animation: livechatAnim 2.5s ease-in-out infinite;
 }
 
 @media (max-width: 1024px) {
