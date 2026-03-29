@@ -99,14 +99,72 @@ a {
   padding: 0;
 }
 
-.nav-menu a {
-  color: #fff6cc;
-  font-weight: bold;
-  font-size: 14px;
+/* ================= NAVBAR ================= */
+.navbar {
+  background: linear-gradient(to bottom, #3f2b00, #1d1400);
+  border-top: 1px solid #ffea8a;
+  border-bottom: 2px solid #ffd700;
+  padding: 8px 0;
 }
 
-.nav-menu a:hover {
-  color: #ffd700;
+/* container menu */
+.nav-menu {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0; /* penting biar gak ada jarak */
+}
+
+/* item */
+.nav-menu li {
+  margin: 0;
+  padding: 0;
+}
+
+/* link menu */
+.nav-menu li a {
+  display: block;
+  position: relative;
+  padding: 12px 14px; /* lebih rapat */
+  color: #fff6cc;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+/* hover */
+.nav-menu li a:hover {
+  color: #1a1a1a;
+  background: linear-gradient(90deg, #ffd700, #ffb300);
+}
+
+/* garis bawah animasi */
+.nav-menu li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background: #ffd700;
+  transform: translateX(-50%);
+  transition: 0.25s;
+}
+
+/* animasi muncul */
+.nav-menu li a:hover::after {
+  width: 80%;
+}
+
+/* menu aktif */
+.nav-menu li a.active {
+  color: #1a1a1a;
+  background: linear-gradient(90deg, #ffd700, #ffb300);
 }
 
 .hero {
