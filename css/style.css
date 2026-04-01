@@ -403,12 +403,9 @@ a {
 
 /* gambar */
 .livechat img {
-  width: 120px;
-  height: auto;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(255, 200, 0, 0.5);
-  transition: 0.3s;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
 }
 
 /* tulisan di bawah */
